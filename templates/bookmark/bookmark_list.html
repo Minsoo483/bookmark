@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>북마크 목록</title>
+</head>
+<body>
+  <p>
+    <a href="{% url 'bookmark:create' %}">북마크 추가</a>
+    <a href="/">Home</a>
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>번호</th><th>사이트 이름</th><th>사이트 주소</th><th>수정</th><th>삭제</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for bookmark in object_list %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>
+          <a href="{% url 'bookmark:detail' pk=bookmark.id %}">{{ bookmark.site_name}}</a>
+        </td>
+        <td><a href="{{ bookmark.url }}" target="_blank">{{ bookmark.url }}</a></td>
+        <td><a href="{% url 'bookmark:update' pk=bookmark.id %}">수정</a></td>
+        <td><a href="{% url 'bookmark:delete' pk=bookmark.id %}">삭제</a></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</body>
+</html>
